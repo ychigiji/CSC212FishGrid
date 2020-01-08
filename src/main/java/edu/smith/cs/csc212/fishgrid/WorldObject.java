@@ -10,8 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import me.jjfoley.gfx.IntPoint;
 
 /**
- * A WorldObject is an abstract "item" in the game.
- * Fish, the player, rocks, and the Snail are all WorldObject subclasses.
+ * A WorldObject is an abstract "item" in the game. Fish, the player, rocks, and
+ * the Snail are all WorldObject subclasses.
  * 
  * All movement is defined in this class.
  * 
@@ -39,10 +39,9 @@ public abstract class WorldObject {
 	 */
 	public static int NUM_RECENT_POSITIONS = 64;
 	/**
-	 * Here, we use a list that makes it easy to both:
-	 *  - add to the front and
-	 *  - remove from the back.
-	 * Because we want keep up to NUM_RECENT_POSITIONS locations for every fish.
+	 * Here, we use a list that makes it easy to both: - add to the front and -
+	 * remove from the back. Because we want keep up to NUM_RECENT_POSITIONS
+	 * locations for every fish.
 	 *
 	 * https://docs.oracle.com/javase/7/docs/api/java/util/Deque.htmlP
 	 */
@@ -57,7 +56,7 @@ public abstract class WorldObject {
 		this.world = world;
 		this.recentPositions = new LinkedList<>();
 	}
-	
+
 	/**
 	 * Remove this WorldObject from its world.
 	 */
@@ -125,6 +124,15 @@ public abstract class WorldObject {
 	}
 
 	/**
+	 * Is this a rock?
+	 * 
+	 * @return true if this is a rock.
+	 */
+	public boolean isRock() {
+		return this instanceof Rock;
+	}
+
+	/**
 	 * Is this the player?
 	 * 
 	 * @return true if this is a Fish that is the player.
@@ -176,28 +184,25 @@ public abstract class WorldObject {
 	}
 
 	/**
-	 * Move randomly! 
+	 * Move randomly!
 	 */
 	public void moveRandomly() {
 		// Can we move right, left, down, or up?
-		boolean canMove = 
-				world.canSwim(this, x+1, y) ||
-				world.canSwim(this, x-1, y) ||
-				world.canSwim(this, x, y+1) ||
-				world.canSwim(this, x, y-1);
-		
+		boolean canMove = world.canSwim(this, x + 1, y) || world.canSwim(this, x - 1, y)
+				|| world.canSwim(this, x, y + 1) || world.canSwim(this, x, y - 1);
+
 		// If not, don't try to pick one.
 		if (!canMove) {
 			// "this" is stuck, and can't go anywhere!
 			return;
 		}
-		
+
 		// Pick one at random (that works):
 		while (true) {
-			
+
 			// Choose a direction at random.
 			int direction = ThreadLocalRandom.current().nextInt(4);
-			
+
 			boolean success = false;
 			if (direction == 0) {
 				success = moveUp();
@@ -208,7 +213,7 @@ public abstract class WorldObject {
 			} else {
 				success = moveLeft();
 			}
-			
+
 			// Did the direction we picked work?
 			if (success) {
 				// If so, exit this method now.
@@ -234,8 +239,8 @@ public abstract class WorldObject {
 	 */
 	public int getY() {
 		return this.y;
-	}
 
+	}
 
 	public IntPoint getPosition() {
 		return new IntPoint(this.x, this.y);

@@ -3,10 +3,13 @@ package edu.smith.cs.csc212.fishgrid;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.RoundRectangle2D;
+import java.util.Random;
 
 /**
- * It would be awful nice to have multi-colored rocks at random.
- * This is not <a href="https://en.wikipedia.org/wiki/Dwayne_Johnson">the Rock</a>, but a Rock.
+ * It would be awful nice to have multi-colored rocks at random. This is not
+ * <a href="https://en.wikipedia.org/wiki/Dwayne_Johnson">the Rock</a>, but a
+ * Rock.
+ * 
  * @author jfoley
  */
 public class Rock extends WorldObject {
@@ -15,28 +18,26 @@ public class Rock extends WorldObject {
 	 * https://en.wikipedia.org/wiki/Shades_of_gray#Cool_grays
 	 * https://en.wikipedia.org/wiki/Shades_of_gray#Warm_grays
 	 */
-	private static Color[] ROCK_COLORS = new Color[] {
-			new Color(144,144,192),
-			new Color(145,163,176),
-			new Color(112,128,144),
-			new Color(94,113,106),
-			new Color(76,88,102),
-			new Color(170,152,169),
-			new Color(152,129,123),
-			new Color(138,129,141),
-			new Color(72,60,50)
+	private static Color[] ROCK_COLORS = new Color[] { new Color(144, 144, 192), new Color(145, 163, 176),
+			new Color(112, 128, 144), new Color(94, 113, 106), new Color(76, 88, 102), new Color(170, 152, 169),
+			new Color(152, 129, 123), new Color(138, 129, 141), new Color(72, 60, 50)
+
 	};
-	
-	// TODO(lab): introduce a variable that is part of the class (one per Rock object) here that indexes the ROCK_COLORS array.
-	
+	int rockColor;
+
 	/**
 	 * Construct a Rock in our world.
+	 * 
 	 * @param world - the grid world.
 	 */
 	public Rock(World world) {
 		super(world);
-		// TODO(lab): initialize your rock color index to a random number!
-		// Note that all WorldObjects have a ``rand`` available so you don't need to make one.
+		// initialize your rock color index to a random number!
+
+		Random rand = new Random();
+		this.rockColor = rand.nextInt(ROCK_COLORS.length);
+		// Note that all WorldObjects have a ``rand`` available so you don't need to
+		// make one.
 	}
 
 	/**
@@ -44,15 +45,15 @@ public class Rock extends WorldObject {
 	 */
 	@Override
 	public void draw(Graphics2D g) {
-		// TODO(lab): use the right color in here...
-		g.setColor(Color.gray);
-		RoundRectangle2D rock = new RoundRectangle2D.Double(-.5,-.5,1,1,0.3,0.3);
+		// use the right color in here...
+		g.setColor(ROCK_COLORS[rockColor]);
+		RoundRectangle2D rock = new RoundRectangle2D.Double(-.5, -.5, 1, 1, 0.3, 0.3);
 		g.fill(rock);
 	}
 
 	@Override
 	public void step() {
-		// Rocks don't actually *do* anything.		
+		// Rocks don't actually *do* anything.
 	}
 
 }

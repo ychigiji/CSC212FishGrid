@@ -1,4 +1,4 @@
-# FishGrid: Finding Fish (Lists)
+public static final int NUM_ROCKS# FishGrid: Finding Fish (Lists)
 
 [Online Javadoc](https://jitpack.io/com/github/jjfiv/CSC212FishGrid/1.3-SNAPSHOT/javadoc/)
 

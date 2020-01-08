@@ -6,8 +6,8 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
 /**
- * Most Fish behavior lives up in WorldObject (a Fish just looks special!).
- * Or it is in Main, where the missing/found and player fish all act different!
+ * Most Fish behavior lives up in WorldObject (a Fish just looks special!). Or
+ * it is in Main, where the missing/found and player fish all act different!
  * 
  * @author jfoley
  */
@@ -15,22 +15,21 @@ public class Fish extends WorldObject {
 	/**
 	 * A fish is only special because of its color now!
 	 */
-	static Color[] COLORS = {
-			Color.red,
-			Color.green,
-			Color.yellow
-			// TODO: (lab) Add more colors.
-			// TODO: (FishGrid) Maybe make a special fish that is more points?
+	static Color[] COLORS = { Color.black, Color.green, Color.yellow, Color.blue, Color.red, Color.pink, Color.white,
+			Color.orange, Color.magenta, Color.darkGray, Color.WHITE,
+
+			// Add more colors.
+			// (FishGrid) Maybe make a special fish that is more points?
 	};
 	/**
 	 * This is an index into the {@link #COLORS} array.
 	 */
-	int color;
+	int colorIndex;
 	/**
 	 * Whether or not this is the player;
 	 */
 	boolean player = false;
-	
+
 	/**
 	 * Called only on the Fish that is the player!
 	 */
@@ -38,33 +37,35 @@ public class Fish extends WorldObject {
 		this.player = true;
 	}
 
-
 	/**
 	 * A Fish knows what World it belongs to, because all WorldObjects do.
+	 * 
 	 * @param color Color by number.
 	 * @param world The world itself.
 	 */
 	public Fish(int color, World world) {
 		super(world);
-		this.color = color;
+		this.colorIndex = color;
 	}
-	
+
 	/**
 	 * What actual color is this fish? We store an index, so get it here.
+	 * 
 	 * @return the Color object from our array.
 	 */
 	public Color getColor() {
-		return COLORS[this.color];
+		return COLORS[this.colorIndex];
 	}
-	
+
 	/**
 	 * Animate our fish by facing left and then right over time.
 	 */
 	private int dt = 0;
-	
+
 	/**
-	 * Go ahead and ignore this method if you're not into graphics.
-	 * We use "dt" as a trick to make the fish change directions every second or so; this makes them feel a little more alive.
+	 * Go ahead and ignore this method if you're not into graphics. We use "dt" as a
+	 * trick to make the fish change directions every second or so; this makes them
+	 * feel a little more alive.
 	 */
 	@Override
 	public void draw(Graphics2D g) {
@@ -76,18 +77,17 @@ public class Fish extends WorldObject {
 		Shape body = new Ellipse2D.Double(-.40, -.2, .8, .4);
 		Shape tail = new Ellipse2D.Double(+.2, -.3, .2, .6);
 		Shape eye = new Ellipse2D.Double(-.25, -.1, .1, .1);
-		
+
 		Color color = getColor();
 		Color tailColor = color.darker();
 
-		
 		Graphics2D flipped = (Graphics2D) g.create();
 		if (dt < 50) {
 			flipped.scale(-1, 1);
 		}
-		
+
 		if (this.player) {
-			flipped.setColor(new Color(1f,1f,1f,0.5f));
+			flipped.setColor(new Color(1f, 1f, 1f, 0.5f));
 			flipped.fill(circle);
 		}
 
@@ -101,10 +101,10 @@ public class Fish extends WorldObject {
 		// draw tail:
 		flipped.setColor(tailColor);
 		flipped.fill(tail);
-		
+
 		flipped.dispose();
 	}
-	
+
 	@Override
 	public void step() {
 		// Fish are controlled at a higher level; see FishGame.

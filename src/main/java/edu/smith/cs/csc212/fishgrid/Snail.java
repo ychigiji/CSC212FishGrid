@@ -8,10 +8,11 @@ import java.awt.geom.Rectangle2D;
 
 /**
  * A Snail moves left to right and bumps into things!
+ * 
  * @author jfoley
  */
 public class Snail extends WorldObject {
-	
+
 	/**
 	 * This is the color of the Snail's body.
 	 */
@@ -32,9 +33,10 @@ public class Snail extends WorldObject {
 	 * Is the snail going to the left?
 	 */
 	public boolean movingLeft = false;
-	
+
 	/**
 	 * Create a new Snail in a part of this world.
+	 * 
 	 * @param world - the world where the snail moves/lives.
 	 */
 	public Snail(World world) {
@@ -42,13 +44,13 @@ public class Snail extends WorldObject {
 	}
 
 	/**
-	 * Polishing up my Snail draw method...
-	 * This is kind of a mess, but that's graphics for you.
+	 * Polishing up my Snail draw method... This is kind of a mess, but that's
+	 * graphics for you.
 	 */
 	@Override
 	public void draw(Graphics2D input) {
 		Graphics2D g = (Graphics2D) input.create();
-		g.scale(1.0/100.0, 1.0/100.0);
+		g.scale(1.0 / 100.0, 1.0 / 100.0);
 		g.translate(-30, 0);
 		Shape body = new Rectangle2D.Double(0, 0, 40, 50);
 		Shape tentacleL = new Rectangle2D.Double(0, -20, 5, 20);
@@ -57,7 +59,7 @@ public class Snail extends WorldObject {
 		Shape tentacleR = new Rectangle2D.Double(35, -20, 5, 20);
 		Shape eyeWhiteR = new Ellipse2D.Double(35 - 4, -28, 12, 12);
 		Shape eyePupilR = new Ellipse2D.Double(35 + 2, -26 + 4, 4, 4);
-		
+
 		bodyColor = Color.magenta;
 		g.setColor(bodyColor);
 		g.fill(body);
@@ -96,9 +98,8 @@ public class Snail extends WorldObject {
 	}
 
 	/**
-	 * Move the snail left until it hits an obstacle. 
-	 * Then move it right until it hits an obstacle.
-	 * Alternate eyes open/closed as it moves.
+	 * Move the snail left until it hits an obstacle. Then move it right until it
+	 * hits an obstacle. Alternate eyes open/closed as it moves.
 	 */
 	@Override
 	public void step() {
